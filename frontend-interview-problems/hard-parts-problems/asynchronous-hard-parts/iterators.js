@@ -1,6 +1,6 @@
 // http://csbin.io/iterators
 
-// CHALLENGE 2
+// CHALLENGE 1
 
 // A) Create a for loop that iterates through an array and returns the sum of the elements of the array.
 
@@ -150,3 +150,16 @@ Words.prototype[Symbol.iterator] = function () {
 // const helloWorld = new Words('Hello World');
 // for (let word of helloWorld) { console.log(word); } // -> should log 'Hello' and 'World'
 
+//
+
+function* genTest () {
+  const num = 10
+  const newNum = yield num
+  console.log("new ", newNum)
+  yield 5 + newNum
+}
+
+const g = genTest()
+
+console.log(g.next())
+console.log(g.next(2))
