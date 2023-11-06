@@ -11,6 +11,10 @@ function makePerson (name, age) {
   return person
 }
 
+//makePerson (name, age){
+// return { name, age }
+// }
+
 const vicky = makePerson('Vicky', 24);
 
 

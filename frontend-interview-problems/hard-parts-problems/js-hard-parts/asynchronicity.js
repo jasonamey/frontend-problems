@@ -139,16 +139,34 @@ function promised (val) {
 
 //challenge 9 
 
-
 class SecondClock {
   constructor (cb) {
     this.mainMethod = cb
+    this.clockStart = 0
+    this.timerId = null
   }
-  // ADD METHODS HERE
+  start () {
+    this.clockStart += 100
+    this.timerId = setInterval(() => {
+      this.clockStart += 100
+    }, 100)
+  }
+  stop () {
+    clearInterval(this.timerId)
+    console.log(`clock ran: ${ (this.clockStart / 1000) } seconds`)
+    this.clockStart = 0
+  }
 }
 
+
 // UNCOMMENT THESE TO TEST YOUR WORK!
+// ??????
 // const clock = new SecondClock((val) => { console.log(val) });
+// clock.start()
+// setTimeout(() => {
+//   clock.stop()
+// }, 3000)
+// ??????
 // console.log("Started Clock.");
 // clock.start();
 // setTimeout(() => {
@@ -157,3 +175,17 @@ class SecondClock {
 // }, 6000);
 
 //
+
+/* CHALLENGE 10 */
+
+// function debounce (func, delay) {
+
+// }
+
+// // UNCOMMENT THESE TO TEST YOUR WORK!
+// function giveHi () { return 'hi'; }
+// const giveHiSometimes = debounce(giveHi, 3000);
+// console.log(giveHiSometimes()); // -> 'hi'
+// setTimeout(function () { console.log(giveHiSometimes()); }, 2000); // -> undefined
+// setTimeout(function () { console.log(giveHiSometimes()); }, 4000); // -> undefined
+// setTimeout(function () { console.log(giveHiSometimes()); }, 8000); // -> 'hi'

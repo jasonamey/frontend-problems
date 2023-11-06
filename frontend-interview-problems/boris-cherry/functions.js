@@ -148,10 +148,24 @@ const functions = {
       set.add(element)
     }
     return Array.from(set)
+  },
+  //Time O(m + n) space O(n) 
+  intersection: function (arr1, arr2) {
+    const set = new Set()
+    const intersection = []
+    for (const element of arr1) {
+      set.add(element)
+    }
+    for (const element of arr2) {
+      if (set.has(element)) {
+        intersection.push(element)
+      }
+    }
+    return intersection
   }
 
 }
 
-console.log(functions.uniq([1, 2, 2, 3, 1, 2, 3, 4, 32]))
+console.log(functions.intersection([1, 5, 4, 2], [8, 91, 4, 1, 3]))
 
 module.exports = functions

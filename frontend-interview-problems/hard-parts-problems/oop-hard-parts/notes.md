@@ -41,6 +41,47 @@ const user2 = userCreator("Walter", 3)
 <br/>
 <pre style="display: inline;">Object.create(objectToReference)</pre> creates a .__proto__ for the created object 
 
+### How to **subclass** with this approach : 
+
+<pre>
+function userCreate(name, score){
+  const newUser = {}
+  newUser.name = name 
+  newUser.score = score
+  return newUser
+}
+userFunctions = { 
+  sayName: function(){
+    console.log(`I am ${this.name}`)
+  }, 
+  increment: function(){
+    this.score++
+  }
+}
+
+const user1 = userCreator("Jason", 5)
+user1.sayName() // "I am Jason"
+
+function paidUserCreator(paidName, paidScore, accountBalance){
+  const newPaidUser = userCreator(paidName, paidScore)
+  Object.setPrototypeOf(newPaidUser, paidUserFunctions)
+  newPaidUser.accountBalance = accountBalance
+  return newPaidUser
+}
+
+const paidUserFunctions = { 
+  increaseBalance: function(){
+    this.accountBalance++
+  }
+}
+
+Object.setPrototypeOf(paidUserFunctions, userFunctions)
+
+const paidUser1 = paidUserCreator("Dognose", 8, 25)
+
+paidUser1.increaseBalance()
+paidUser1.sayName()
+</pre> 
 ## 3. Introduce the "new" keyword which automates a few things... 
 
 **"new" automates:**
@@ -75,9 +116,48 @@ UserCreator.prototype.login = function(){
 
 The word <span style="font-family: courier;">new</span> mutates the execution context when you call <span style="font-family: courier;">userCreator</span> - it inserts <span style="font-family: courier;">this</span> to an empty object. The <span style="font-family: courier;">this</span> object has a the hidden dunder property  <span style="font-family: courier;">__ proto __</span> which links to <span style="font-family: courier;">prototype</span> object.  <span style="font-family: courier;">new</span> also auto assigns all arguments passed to the userCreator function to the  <span style="font-family: courier;">this</span> object i.e. : <span style="font-family: courier;">UserCreator("dognose") --> this.name = dognose</span>
 
-<span style="font-family: courier;">this</span> 
 
-## 3. Introduction of the **class** keyword... 
+### How to **subclass** with this approach : 
+
+<pre>
+//called with "new" 
+function userCreator(name, score){
+  this.name = name
+  this.score = score
+}
+
+userCreator.prototype.sayName = function(){
+  console.log("I'm " + this.name)
+}
+
+userCreator.prototype.increment = function(){
+  this.score++
+}
+
+const user1 = new userCreator("Donald", 5)
+const user2 = new userCreator("Walter", 4)
+
+user1.sayName() // "I'm Donald" 
+
+function paidUserCreator(paidName, paidScore, accountBalance){
+  userCreator.call(this, paidName, paidScore)
+  this.accountBalance = accountBalance
+}
+
+paidUserCreator.prototype = Object.create(userCreator.prototype)
+
+paidUserCreator.prototype.increaseBalance = function(){
+  this.accountBalance++
+}
+
+const paidUser = new paidUserCreator("Gaucho", 8, 25)
+
+paidUser1.increaseBalance()
+
+paidUser1.sayName()
+</pre>
+
+## 4. Introduction of the **class** keyword... 
 
 <pre>
 class UserCreator {
@@ -106,6 +186,47 @@ UserCreator.prototype.login = function(){
   console.log("Logged In!")
 }
 </pre>
+
+Stay away from using the dunder method __ proto __ and default to using .getPrototypeOf
+
+### How to **subclass** with this approach : 
+<pre>
+class userCreator { 
+  constructor(name, score){
+    this.name = name
+    this.score = score
+  }
+  sayName(){
+    console.log(`I am ${this.name}`)
+  }
+  increment(){
+    this.score++
+  }
+}
+
+const user1 = new userCreator("Phil", 4)
+const user2 = new userCreator("Tim", 4)
+
+user1.sayName()
+
+class paidUserCreator extends userCreator {
+  constructor(paidName, paidScore, accountBalance){
+    super(paidName, paidScore)
+    this.accountBalance = accountBalance
+  }
+  increaseBalance(){
+    this.accountBalance++
+  }
+}
+
+const paidUser1 = new paidUserCreator("Alyssa", 8, 25)
+
+paidUser1.increaseBalance()
+paidUser1.sayName()
+
+
+</pre>
+
 
 
 

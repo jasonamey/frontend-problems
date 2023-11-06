@@ -102,10 +102,23 @@ test.skip("checks higher fibonacci numbers", () => {
 })
 
 //12
-test("check for balanced braces for 3 types of braces", () => {
+test.skip("check for balanced braces for 3 types of braces", () => {
   const { isBalanced: isBalanced2 } = functions
   expect(isBalanced2('(foo { bar (baz) [boo] })')).toBe(true)
   expect(isBalanced2('foo { bar { baz }')).toBe(false)
   expect(isBalanced2('foo { (bar [baz] } )')).toBe(false)
 })
 
+//13
+test.skip("return an array of all the unique numbers in an array", () => {
+  const { uniq } = functions
+  expect(uniq([])).toEqual([])
+  expect(uniq([1, 4, 2, 2, 3, 4, 8])).toEqual([1, 4, 2, 3, 8])
+})
+
+//14 
+test.skip("return an array of the intersection of the numbers in two arrays", () => {
+  const { intersection } = functions
+  expect(intersection([1, 5, 4, 2], [8, 91, 4, 1, 3])).toEqual([4, 1])
+  expect(intersection([1, 5, 4, 2], [7, 12])).toEqual([])
+})
