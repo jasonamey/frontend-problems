@@ -166,6 +166,5 @@ const functions = {
 
 }
 
-console.log(functions.intersection([1, 5, 4, 2], [8, 91, 4, 1, 3]))
 
 module.exports = functions
