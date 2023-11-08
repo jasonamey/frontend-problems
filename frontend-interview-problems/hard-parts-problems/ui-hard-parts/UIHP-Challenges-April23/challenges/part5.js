@@ -1,35 +1,40 @@
-let myName = "";
-let vDOM;
-let elems;
+let data = { "myName": "" }
+let vDOM = createVDOM();
+let elems
+let prevDOM
 
-function createVDOM() {
+function createVDOM () {
   return [
     [
       "input",
-      myName,
-      function handle(e) {
-        myName = e.target.value;
+      data["myName"],
+      function handle (e) {
+        updateData("myName", e.target.value)
       },
     ],
-    ["div", `Hello, ${myName}!`],
+    ["div", `Hello, ${ data["myName"] }!`],
     ["div", `Great job, Jonathan!`],
     ["div", `Great job, Alexa!`],
     ["div", `Great job, Emilia!`],
   ];
 }
 
-function updateDOM() {
-  if (vDOM)
+function updateDOM () {
+  if (elems === undefined) {
+    elems = vDOM.map(convert)
+    document.body.replaceChildren(...elems)
+  } else {
     document.activeElement == document.querySelector("input")
       ? (isFocus = true)
-      : (isFocus = false); // keep this code
-  vDOM = createVDOM();
-  elems = vDOM.map(convert);
-  document.body.replaceChildren(...elems);
-  if (isFocus) elems[0].focus(); //keep this code
+      : (isFocus = false)
+    prevDOM = [...vDOM]
+    vDOM = createVDOM()
+    findDiff(prevDOM, vDOM)
+    if (isFocus) elems[0].focus();
+  }
 }
 
-function convert(node) {
+function convert (node) {
   const element = document.createElement(node[0]);
   element.textContent = node[1];
   element.value = node[1];
@@ -37,12 +42,19 @@ function convert(node) {
   return element;
 }
 
-// function findDiff(prevVDOM, currentVDOM) {
-//     for (let i = 0; i < currentVDOM.length; i++) {
-//         if(JSON.stringify(prevVDOM[i]) !== JSON.stringify(currentVDOM[i])){
-//             // change the actual DOM element related to that vDOM element!
-//         }
-//     }
-// }
+function updateData (label, value) {
+  data[label] = value
+  updateDOM()
+}
 
-setInterval(updateDOM, 15);
+function findDiff (prevVDOM, currentVDOM) {
+  for (let i = 0; i < currentVDOM.length; i++) {
+    if (JSON.stringify(prevVDOM[i]) !== JSON.stringify(currentVDOM[i])) {
+      elems[i].textContent = currentVDOM[i][1]
+      elems[i].value = currentVDOM[i][1]
+    }
+  }
+}
+
+updateDOM()
+

@@ -84,6 +84,4 @@ function convert (node) {
   return element;
 }
 
-// updateDOM()
-
 setInterval(updateDOM, 15);
