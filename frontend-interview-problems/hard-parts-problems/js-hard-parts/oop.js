@@ -64,4 +64,25 @@ personStore.introduce = function () {
   console.log(`Hi, my name is ${ this.name }`);
 }
 
-sandra.introduce(); // -> Logs 'Hi, my name is Sandra'
+// sandra.introduce(); // -> Logs 'Hi, my name is Sandra'
+
+
+/****************************************************************
+                    USING THE 'NEW' KEYWORD
+****************************************************************/
+
+/*** CHALLENGE 5 ***/
+
+function PersonConstructor () {
+  // add code here
+
+
+}
+
+
+// /********* Uncomment this line to test your work! *********/
+const simon = new PersonConstructor;
+// simon.greet(); // -> Logs 'hello'
+
+
+module.exports = { makePerson, personStore, personFromPersonStore, PersonConstructor }

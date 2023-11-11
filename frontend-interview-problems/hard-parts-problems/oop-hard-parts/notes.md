@@ -96,12 +96,17 @@ paidUser1.sayName()
   //uppercase of UserCreator implies you need "new" to work : 
 
   function UserCreator(name, score){
+  /*
+  NOT NEEDED: 
   <span style="text-decoration: line-through;">const newUser = Object.create(userFunctionStore)</span>
   <span style="text-decoration: line-through;">newUser.name = name</span>
-  this.name = name
+ 
   <span style="text-decoration: line-through;">newUser.score= score</span>
-  this.score = score
+  
   <span style="text-decoration: line-through;">return newUser</span>
+  */
+  this.score = score
+  this.name = name
 }
 UserCreator.prototype // {}
 

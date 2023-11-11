@@ -189,3 +189,5 @@ class SecondClock {
 // setTimeout(function () { console.log(giveHiSometimes()); }, 2000); // -> undefined
 // setTimeout(function () { console.log(giveHiSometimes()); }, 4000); // -> undefined
 // setTimeout(function () { console.log(giveHiSometimes()); }, 8000); // -> 'hi'
+
+module.exports = { delayedGreet, helloGoodbye, brokenRecord, limitedRepeat, everyXsecsForYsecs }
