@@ -116,9 +116,23 @@ test.skip("return an array of all the unique numbers in an array", () => {
   expect(uniq([1, 4, 2, 2, 3, 4, 8])).toEqual([1, 4, 2, 3, 8])
 })
 
-//14 
+//4 
 test.skip("return an array of the intersection of the numbers in two arrays", () => {
   const { intersection } = functions
   expect(intersection([1, 5, 4, 2], [8, 91, 4, 1, 3])).toEqual([4, 1])
   expect(intersection([1, 5, 4, 2], [7, 12])).toEqual([])
+})
+//5
+test("sorts an array in n*log(n) time", () => {
+  const { sort } = functions
+  expect(sort([])).toEqual([])
+  expect(sort([-4, 1, Infinity, 3, 3, 0])).toEqual([-4, 0, 1, 3, 3, Infinity])
+})
+
+//6
+test("determines if target is found in sorted array", () => {
+  const { includes } = functions
+  expect(includes([1, 3, 8, 10], 8)).toBe(true)
+  expect(includes([1, 3, 8, 8, 15], 15)).toBe(true)
+  expect(includes([1, 3, 8, 10, 15], 9)).toBe(false)
 })

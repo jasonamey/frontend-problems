@@ -134,13 +134,13 @@ const functions = {
     }
     return stack.length === 0
   },
-  //11 
+  //1 
   //repeat of fibonacci() - memoization included 
 
-  //12 
+  //2 
   //repeat of isBalanced() - 3 braces already included 
 
-  //13
+  //3
   //O(n) time O(n) space
   uniq: function (arr) {
     const set = new Set()
@@ -149,6 +149,7 @@ const functions = {
     }
     return Array.from(set)
   },
+  //4
   //Time O(m + n) space O(n) 
   intersection: function (arr1, arr2) {
     const set = new Set()
@@ -162,8 +163,54 @@ const functions = {
       }
     }
     return intersection
+  },
+  //time O(n*log(n)) space(log(n))
+  //quicksort 
+  sort: function (arr) {
+    function helper (low, hi, arr) {
+      if (low >= hi) return
+      let pivot = low
+      let left = pivot + 1
+      let right = hi
+      while (left <= right) {
+        if (arr[left] > arr[pivot] && arr[right] < arr[pivot]) {
+          swap(left, right, arr)
+        }
+        if (arr[left] <= arr[pivot]) {
+          left += 1
+        }
+        if (arr[right] >= arr[pivot]) {
+          right -= 1
+        }
+      }
+      swap(pivot, right, arr)
+      helper(low, right - 1, arr)
+      helper(right + 1, hi, arr)
+    }
+    function swap (i, j, arr) {
+      temp = arr[i]
+      arr[i] = arr[j]
+      arr[j] = temp
+    }
+    helper(0, arr.length - 1, arr)
+    return arr
+  },
+  includes: function (arr, target) {
+    let lo = 0
+    let hi = arr.length - 1
+    while (lo <= hi) {
+      mid = Math.ceil((hi + lo) / 2)
+      if (arr[mid] === target) {
+        return true
+      }
+      if (arr[mid] > target) {
+        hi = mid - 1
+      } else {
+        lo = mid + 1
+      }
+    }
+    return false
   }
-
 }
 
 

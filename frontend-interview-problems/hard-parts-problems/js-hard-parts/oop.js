@@ -11,19 +11,6 @@ function makePerson (name, age) {
   return person
 }
 
-//makePerson (name, age){
-// return { name, age }
-// }
-
-const vicky = makePerson('Vicky', 24);
-
-
-// /********* Uncomment these lines to test your work! *********/
-// console.log(vicky.name); // -> Logs 'Vicky'
-// console.log(vicky.age); // -> Logs 24
-
-//
-
 /****************************************************************
                        USING OBJECT.CREATE
 ****************************************************************/
@@ -37,10 +24,6 @@ const personStore = {
   }
 };
 
-// /********* Uncomment this line to test your work! *********/
-// personStore.greet(); // -> Logs 'hello'
-
-
 /*** CHALLENGE 3 ***/
 
 function personFromPersonStore (name, age) {
@@ -50,22 +33,11 @@ function personFromPersonStore (name, age) {
   return person
 }
 
-const sandra = personFromPersonStore('Sandra', 26);
-
-
-// /********* Uncomment these lines to test your work! *********/
-// console.log(sandra.name); // -> Logs 'Sandra'
-// console.log(sandra.age); //-> Logs 26
-// sandra.greet(); //-> Logs 'hello'
-
 /*** CHALLENGE 4 ***/
 
 personStore.introduce = function () {
   console.log(`Hi, my name is ${ this.name }`);
 }
-
-// sandra.introduce(); // -> Logs 'Hi, my name is Sandra'
-
 
 /****************************************************************
                     USING THE 'NEW' KEYWORD
@@ -73,16 +45,57 @@ personStore.introduce = function () {
 
 /*** CHALLENGE 5 ***/
 
-function PersonConstructor () {
-  // add code here
+function PersonConstructor (name, age) {
+  this.name = name
+  this.age = age
+}
 
-
+PersonConstructor.prototype.greet = function () {
+  console.log('hello')
 }
 
 
-// /********* Uncomment this line to test your work! *********/
-const simon = new PersonConstructor;
-// simon.greet(); // -> Logs 'hello'
+/*** CHALLENGE 6 ***/
+
+function personFromConstructor (name, age) {
+  return new PersonConstructor(name, age)
+}
+
+/*** CHALLENGE 7 ***/
+
+PersonConstructor.prototype.introduce = function () {
+  console.log(`Hi, my name is ${ this.name }`);
+}
+
+/****************************************************************
+                        USING ES6 CLASSES
+****************************************************************/
+
+/*** CHALLENGE 8 ***/
+
+class PersonClass {
+  constructor (name, age) {
+    this.name = name
+    this.age = age
+  }
+  greet () {
+    console.log('hello')
+  }
+
+}
+
+/*** CHALLENGE 9 ***/
+
+class DeveloperClass {
+  constructor (name, age) {
+    this.name = name
+    this.age = age
+  }
+  introduce () {
+    console.log(`Hello World, my name is ${ this.name }`)
+  }
+}
 
 
-module.exports = { makePerson, personStore, personFromPersonStore, PersonConstructor }
+module.exports = { makePerson, personStore, personFromPersonStore, PersonConstructor, personFromConstructor, PersonClass, DeveloperClass }
+

@@ -392,8 +392,7 @@ function average () {
 //challenge
 
 
-
-
+module.exports = { createFunction, createFunctionPrinter, addByX, once, after, delay, rollCall, saveOutput, cycleIterator, defineFirstArg, dateStamp, censor, createSecretHolder, callTimes, roulette, average }
 
 
 
