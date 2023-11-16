@@ -210,6 +210,25 @@ const functions = {
       }
     }
     return false
+  },
+  //check this ... not done yet
+  assignDeep (obj1, obj2) {
+    let newObj = {}
+    for (let key in obj1) {
+      if (typeof obj1[key] !== 'object') {
+        newObj[key] = obj1[key]
+      } else {
+        newObj[key] = { ...this.assignDeep(obj1[key], obj2[key]) }
+      }
+    }
+    for (let key in obj2) {
+      if (typeof obj2[key] !== 'object') {
+        newObj[key] = obj2[key]
+      } else {
+        newObj[key] = { ...this.assignDeep(obj1[key], obj2[key]) }
+      }
+    }
+    return newObj
   }
 }
 

@@ -155,11 +155,9 @@ Words.prototype[Symbol.iterator] = function () {
 function* genTest () {
   const num = 10
   const newNum = yield num
-  console.log("new ", newNum)
+
   yield 5 + newNum
 }
 
-const g = genTest()
 
-console.log(g.next())
-console.log(g.next(2))
+

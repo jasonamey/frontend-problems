@@ -1,6 +1,5 @@
 const recursionFunctions = require('./recursion.js')
 
-
 describe("test all recursion functions from recursion.js", () => {
   //1
   it.skip("countdown numbers until blastoff", () => {
@@ -15,7 +14,7 @@ describe("test all recursion functions from recursion.js", () => {
     expect(sum([1, 2, 3, 4, 5, 6])).toBe(21)
   })
   //4
-  it.skip("palindrome checks for palnidrome string", () => {
+  it.skip("palindrome checks for palindrome string", () => {
     const { palindrome } = recursionFunctions
     expect(palindrome("Anne, I vote more cars race Rome-to-Vienna")).toBe(true)
     expect(palindrome("llama mall")).toBe(true)
